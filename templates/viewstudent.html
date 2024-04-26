@@ -1,0 +1,46 @@
+{% extends 'coursenavbar.html' %} {% block body %}
+
+<br><br><br><br>
+<br>
+{% load static %}
+<!-- Header section -->
+<div class="container-fluid" style="background-color: #f5f5f5; padding: 20px;">
+    <h3 align="center" style="color: blue;"><u>View All Students</u></h3>
+    <h4 align="center" style="color: lightblue;">Total Students = {{ count }}</h4>
+</div>
+
+<!-- Table section -->
+<style>
+     body {
+        margin:0.05px;
+        padding: 0.05px;
+        background: url('{% static "images/back2.jpeg" %}') no-repeat center center fixed;
+        background-size: cover;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid #D7BDE2;
+        padding: 10px;
+        text-align: center;
+        font-size: 1.1em;
+    }
+
+    th {
+        background-color: #FFD700; /* yellow */
+        color: #000;
+    }
+
+    tr:nth-child(even) {
+        background-color: #FFA500; /* orange */
+    }
+
+    tr:hover {
+        background-color: #FFD700; /* yellow on hover */
+    }
+</style>
+<table align="center" border="2" width=100%" height="10%" class="table table-bordered table-striped"> <thead> <tr bgcolor="lightblue" align="center"> <td>s.no</td> <td><input type="text" id="studentid-column-filter" placeholder="Filter by Student ID"></td> <td><input type="text" id="fullname-column-filter" placeholder="Filter by Full Name"></td> <td><input type="text" id="gender-column-filter" placeholder="Filter by Gender"></td> <td><input type="text" id="department-column-filter" placeholder="Filter by Department"></td> <td><input type="text" id="program-column-filter" placeholder="Filter by Program"></td> <td><input type="text" id="semester-column-filter" placeholder="Filter by Semester"></td> <td><input type="text" id="year-column-filter" placeholder="Filter by Year"></td> <td>password</td> <td>email</td> <td>contact</td> </tr> </thead> <tbody id="myTable"> {% for course in studentdata %} <tr align="center"> <td>{{course.id}}</td> <td>{{course.studentid}}</td> <td>{{course.fullname}}</td> <td>{{course.gender}}</td> <td>{{course.department}}</td> <td>{{course.program}}</td> <td>{{course.semester}}</td> <td>{{course.year}}</td> <td>{{course.password}}</td> <td>{{course.email}}</td> <td>{{course.contact}}</td> </tr> {% endfor %} </tbody> </table> <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <script> $(document).ready(function(){ $("#all-columns-filter").on("keyup", function() { var value = $(this).val().toLowerCase(); $("#myTable tr").filter(function() { $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1) }); }); $("#studentid-column-filter, #fullname-column-filter, #gender-column-filter, #department-column-filter, #program-column-filter, #semester-column-filter, #year-column-filter").on("keyup", function() { var columnIndex = $(this).closest('td').index(); var value = $(this).val().toLowerCase(); $("#myTable tr").filter(function() { $(this).toggle($(this).find("td").eq(columnIndex).text().toLowerCase().indexOf(value) > -1) }); }); }); </script> {% endblock %}

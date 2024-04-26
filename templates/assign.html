@@ -1,0 +1,22 @@
+{% extends 'coursenavbar.html' %}
+
+{% block body %}
+
+<h2 align="center" style="color:red">{{msg}}</h2>
+
+<h3 align="center"><u>Add Course</u></h3>
+
+<br>
+
+<form method="post" action="{% url 'faccou' %}">
+    {% csrf_token %}
+      <label for="fruits">assign</label>
+        <select id="fruits" name="fruits">
+        {% for faculty in list %}
+      <option value="id">{{faculty.facultyid}} - {{faculty.department}}</option>
+        {% endfor %}
+
+    </select>
+</form>
+
+{% endblock %}

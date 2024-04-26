@@ -1,0 +1,31 @@
+{% extends 'coursenavbar.html' %}
+
+{% block body %}
+
+<h2 align="center" style="color:red">{{msg}}</h2>
+<br>
+<br>
+
+<h3 align="center"><u>Add Course to faculty</u></h3>
+
+<br>
+<br>
+<center>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="cc" value="{{ cc }}-{{name}}">  <!-- Passing the cc value as a hidden input -->
+        <br><label>Course code </label>
+        <h3>{{ cc }}</h3>
+        <br>
+        <label for="fruits">Assign Faculty</label>
+        <select id="fruits" name="fruits">
+            {% for faculty in list %}
+                <option value="{{ faculty.facultyid }}">{{ faculty.facultyid }} - {{ faculty.department }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <button type="submit" class="btn btn-warning">Submit</button>
+    </form>
+</center>
+
+{% endblock %}

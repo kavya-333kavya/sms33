@@ -1,0 +1,153 @@
+{% extends 'coursenavbar.html' %}
+{% block body %}
+<br><br><br><br><br>
+{% load static %}
+<!-- Header section -->
+<div class="container-fluid" style="background-color: #f5f5f5; padding: 20px;margin: 0.005px;border-collapse: collapse;">
+    <h3 align="center" style="color: blue;"><u>View All Faculty</u></h3>
+    <h4 align="center" style="color: lightblue;">Total Faculty = {{ count }}</h4>
+</div>
+
+<!-- Table section -->
+<style>
+     body {
+
+        margin: 0.005px;
+        padding: 0.005px;
+        background: url('{% static "images/back2.jpeg" %}') no-repeat center center fixed;
+        background-size: cover;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid #D7BDE2;
+        padding: 10px;
+        text-align: center;
+        font-size: 1.1em;
+    }
+
+    th {
+        background-color: #FFD700; /* yellow */
+        color: #000;
+    }
+
+    tr:nth-child(even) {
+        background-color: #FFA500; /* orange */
+    }
+
+    tr:hover {
+        background-color: #FFD700; /* yellow on hover */
+    }
+</style>
+
+
+
+
+<table align="center" border="2" width="100%" height="10%" class="table table-bordered table-striped">
+  <thead>
+    <tr bgcolor="lightblue" align="center">
+      <td>sno.</td>
+      <td><input type="text" id="facultyid-column-filter" placeholder="Filter by Faculty ID"></td>
+      <td><input type="text" id="fullname-column-filter" placeholder="Filter by Full Name"></td>
+      <td><input type="text" id="gender-column-filter" placeholder="Filter by Gender"></td>
+      <td><input type="text" id="department-column-filter" placeholder="Filter by Department"></td>
+      <td><input type="text" id="qualification-column-filter" placeholder="Filter by Qualification"></td>
+      <td><input type="text" id="designation-column-filter" placeholder="Filter by Designation"></td>
+      <td>password</td>
+      <td>email</td>
+      <td><input type="text" id="contact-column-filter" placeholder="Filter by Contact"></td>
+    </tr>
+  </thead>
+  <tbody id="myTable">
+    {% for course in facultydata %}
+    <tr align="center">
+      <td>{{course.id}}</td>
+      <td>{{course.facultyid}}</td>
+      <td>{{course.fullname}}</td>
+      <td>{{course.gender}}</td>
+      <td>{{course.department}}</td>
+      <td>{{course.qualification}}</td>
+      <td>{{course.designation}}</td>
+      <td>{{course.password}}</td>
+      <td>{{course.email}}</td>
+      <td>{{course.contact}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#search-button").on("click", function() {
+      var value = $("#search-input").val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+
+    $("#facultyid-column-filter").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).find("td:nth-child(2)").text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+
+    $("#fullname-column-filter").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).find("td:nth-child(3)").text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+
+    $("#gender-column-filter").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        var gender = $(this).find("td:nth-child(4)").text().toLowerCase();
+        if (gender === "female" && value === "male") {
+          $(this).hide();
+        } else if (gender === "male" && value === "female") {
+          $(this).hide();
+        } else {
+          $(this).toggle(gender.indexOf(value) > -1);
+        }
+      });
+    });
+
+    $("#department-column-filter").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).find("td:nth-child(5)").text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+
+    $("#qualification-column-filter").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).find("td:nth-child(6)").text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+
+    $("#designation-column-filter").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).find("td:nth-child(7)").text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+
+    $("#contact-column-filter").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).find("td:nth-child(10)").text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+</script>
+
+{% endblock %}

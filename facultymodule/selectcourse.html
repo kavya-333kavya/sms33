@@ -1,0 +1,32 @@
+{% extends 'studentnavbar.html' %}
+
+{% block content %}
+    <h3 align="center"><u>Select Your Course</u></h3>
+    <br><br>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="student_id">Student ID:</label>
+            <input type="text" class="form-control" id="student_id" name="student_id" required>
+        </div>
+        <div class="form-group">
+            <label for="course_id">Select Course:</label>
+            <select class="form-control" id="course_id" name="course_id" required>
+                <option value="">-- Select Course --</option>
+                {% for course in courses %}
+                    <option value="{{ course.id }}">{{ course.coursetitle }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="faculty_id">Select Faculty:</label>
+            <select class="form-control" id="faculty_id" name="faculty_id" required>
+                <option value="">-- Select Faculty --</option>
+                {% for faculty in faculties %}
+                    <option value="{{ faculty.id }}">{{ faculty.fullname }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}

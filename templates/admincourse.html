@@ -1,0 +1,23 @@
+{% extends 'coursenavbar.html' %}
+
+{% block body %}
+<center>
+<button class="button">
+<a href="{% url 'addcourse' %}" style="color:white">Add Course</a>
+</button>
+
+    <button class="button">
+<a href="{% url 'viewcourses' %}" style="color:white">Views All Courses</a>
+</button>
+
+    <button class="button">
+<a href="" style="color:white">Update Course</a>
+</button>
+
+    <button class="button">
+<a href="{% url 'deletecourse' %}" style="color:white">Delete Course</a>
+</button>
+
+    </center>
+
+{% endblock %}

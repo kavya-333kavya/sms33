@@ -1,0 +1,101 @@
+{% extends 'coursenavbar.html' %}
+
+{% load static %}
+{% block body %}
+<br><br><br><br><br>
+<style>
+     body {
+        margin:0.05px;
+        padding: 0.05px;
+        background: url('{% static "images/back3.jpeg" %}') no-repeat center center fixed;
+        background-size: cover;
+    }
+</style>
+
+
+<br><br>
+    <div style="background-color: white ; padding: 20px; border-radius: 10px;">
+        <h3 align="center" style="color: #333; margin-bottom: 20px;">Add Faculty</h3>
+
+        <form method="post" action="{% url 'addfaculty' %}" style="text-align: center;"><br>
+            {% csrf_token %}
+            <tr>
+            <div style="margin-bottom: 10px;">
+               <td> <label for="Facultyid">Faculty ID:</label></td>
+                <td><input type="text" id="Facultyid" name="facultyid" required></td>
+            </div>
+            </tr>
+            <tr>
+            <div style="margin-bottom: 10px;">
+                <td><label for="fullname">Full Name:</label></td>
+                <td><input type="text" id="fullname" name="fullname" required></td>
+            </div>
+            </tr>
+            <tr>
+            <div style="margin-bottom: 10px;">
+                <td><label for="gender">Gender:</label></td>
+                <td><select id="gender" name="gender" required>
+                    <option value="">--Select--</option>
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                    <option value="OTHER">Other</option>
+                </select></td>
+            </div>
+            </tr>
+            <tr>
+            <div style="margin-bottom: 10px;">
+                <td><label for="department">Department:</label></td>
+                <td><select id="department" name="department" required>
+                    <option value="">--Select--</option>
+                    <option value="CSE(Regulars)">CSE(Regulars)</option>
+                    <option value="CSE(HONORS)">CSE(Honors)</option>
+                    <option value="CSIT">CSIT</option>
+                </select></td>
+            </div>
+            </tr>
+            <tr>
+            <div style="margin-bottom: 10px;">
+                <label for="qualification">Qualification</label>
+                <select id="qualification" name="qualification" required>
+                    <option value="">--Select--</option>
+                    <option value="B.Tech">M.Tech</option>
+                    <option value="B.Tech">Ph.D</option>
+                </select>
+            </div>
+                </tr>
+
+            <div style="margin-bottom: 10px;">
+                <label for="designation">designation</label>
+                <select id="designation" name="designation" required>
+                    <option value="">--Select--</option>
+                    <option value="professor">professor</option>
+                    <option value="associate professor">associate professor</option>
+                     <option value="assistant professor">assistant professor</option>
+                </select>
+            </div>
+
+
+            <div style="margin-bottom: 10px;">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <label for="contact">Contact:</label>
+                <input type="text" id="contact" name="contact" required>
+            </div>
+
+            <div>
+                <input type="submit" value="Add" class="coursebutton" style="margin-right: 10px;">
+                <input type="reset" value="Clear" class="coursebutton">
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
